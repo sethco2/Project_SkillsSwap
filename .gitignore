@@ -1,0 +1,27 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.Python
+
+# --- Virtual environment ---
+.venv/
+venv/
+env/
+
+# --- Django ---
+# Local SQLite database — should never be committed; everyone makes their own
+db.sqlite3
+db.sqlite3-journal
+
+# Collected static files (only matters in production)
+/staticfiles/
+
+# Local environment variables / secrets
+.env
+
+# --- Editor / OS noise ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

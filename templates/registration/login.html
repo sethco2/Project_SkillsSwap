@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Log in · SkillSwap{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="zine-panel">
+      <h1 class="mb-1">Welcome back.</h1>
+      <p class="text-muted mb-4">Log in to post and manage your skills.</p>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        {# Render the form field-by-field so we can apply Bootstrap classes #}
+        {% for field in form %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+            {% for error in field.errors %}
+              <div class="text-danger small mt-1">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        {# Form-wide errors (e.g. "wrong username/password") #}
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-coral w-100 mt-2">Log in</button>
+      </form>
+
+      <p class="text-center mt-4 mb-0">
+        New here? <a href="{% url 'register' %}">Create an account</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+{# Plain JS to add Bootstrap form-control class to every input the auth form renders #}
+<script>
+  document.querySelectorAll('input[type=text], input[type=password], input[type=email]')
+          .forEach(el => el.classList.add('form-control'));
+</script>
+{% endblock %}

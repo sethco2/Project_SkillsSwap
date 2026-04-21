@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Campus SkillSwap — trade what you know{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <span class="eyebrow">Vol. 01 · Campus marketplace</span>
+
+  <h1>
+    Trade what you <span class="accent">know.</span><br>
+    Learn what you <span class="accent">don't.</span>
+  </h1>
+
+  <p class="lead mt-3">
+    Tutoring, design help, music lessons, late-night coding favors — post a
+    skill or hire a classmate, all without leaving campus.
+  </p>
+
+  <div class="mt-4 d-flex gap-3 flex-wrap">
+    <a class="btn btn-coral" href="{% url 'skill_list' %}">Browse skills →</a>
+    {% if user.is_authenticated %}
+      <a class="btn btn-outline-ink" href="{% url 'skill_create' %}">Post your skill</a>
+    {% else %}
+      <a class="btn btn-outline-ink" href="{% url 'register' %}">Create account</a>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Three little "how it works" cards -->
+<section class="row g-4 mt-2">
+  <div class="col-md-4">
+    <div class="zine-card">
+      <span class="tag tag-cat tilt-left">01</span>
+      <h3 class="mt-2">Find a skill</h3>
+      <p class="description">Search by keyword or category — calculus, Adobe Illustrator, guitar, you name it.</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="zine-card">
+      <span class="tag tag-cat tilt-left">02</span>
+      <h3 class="mt-2">Reach out</h3>
+      <p class="description">Each post lists a contact preference — DM, email, in person — pick what works.</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="zine-card">
+      <span class="tag tag-cat tilt-left">03</span>
+      <h3 class="mt-2">Trade or pay</h3>
+      <p class="description">Some skills are paid. Many are free. Either way, you're helping a classmate.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

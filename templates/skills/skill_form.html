@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}{% if is_edit %}Edit skill{% else %}Post a skill{% endif %} · SkillSwap{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="zine-panel">
+      <span class="eyebrow">{% if is_edit %}Editing{% else %}New post{% endif %}</span>
+      <h1 class="mt-2 mb-4">
+        {% if is_edit %}Update “{{ skill.title }}”{% else %}Share something you can do{% endif %}
+      </h1>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% for field in form %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+            {% for error in field.errors %}
+              <div class="text-danger small mt-1">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="d-flex gap-2 mt-4">
+          <button type="submit" class="btn btn-coral">
+            {% if is_edit %}Save changes{% else %}Publish{% endif %}
+          </button>
+          <a class="btn btn-outline-ink"
+             href="{% if is_edit %}{% url 'skill_detail' skill.pk %}{% else %}{% url 'skill_list' %}{% endif %}">
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Add Bootstrap classes to form fields rendered by Django so they pick up our overrides.
+  document.querySelectorAll('input[type=text], input[type=number], textarea')
+          .forEach(el => el.classList.add('form-control'));
+  document.querySelectorAll('select').forEach(el => el.classList.add('form-select'));
+  document.querySelectorAll('input[type=checkbox]').forEach(el => el.classList.add('form-check-input', 'me-2'));
+</script>
+{% endblock %}

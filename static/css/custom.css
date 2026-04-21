@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Campus SkillSwap — "campus zine" theme
+   Sits ON TOP of Bootstrap 5. Bootstrap handles structure (grid, forms,
+   buttons, navbar); this file gives the project its personality.
+   ========================================================================== */
+
+/* ---- Design tokens (CSS variables) -------------------------------------- */
+:root {
+  --ink:      #15131a;       /* deep almost-black for text + borders         */
+  --cream:    #faf6ef;       /* warm off-white background                    */
+  --coral:    #ff5a4a;       /* primary accent — buttons, links, highlights  */
+  --mint:     #0c8a6a;       /* success / "available" badge                  */
+  --slate:    #6b6770;       /* muted text                                   */
+  --shadow:   6px 6px 0 var(--ink); /* hard offset shadow, no blur          */
+  --radius:   14px;          /* soft corners, but not too round              */
+}
+
+/* ---- Base typography ---------------------------------------------------- */
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  /* faint paper-grain texture so the cream doesn't read as flat white */
+  background-image:
+    radial-gradient(rgba(21,19,26,0.035) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+h1, h2, h3, h4, h5, .display-font {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.05; }
+h2 { font-size: 1.9rem; }
+
+a { color: var(--coral); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+
+/* ---- Top navbar --------------------------------------------------------- */
+.navbar-zine {
+  background: var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding: 0.9rem 0;
+}
+.navbar-zine .navbar-brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+}
+.navbar-zine .navbar-brand .brand-mark {
+  display: inline-block;
+  background: var(--coral);
+  color: var(--ink);
+  padding: 0 0.45rem;
+  margin-right: 0.25rem;
+  transform: rotate(-3deg);
+}
+.navbar-zine .nav-link { color: var(--cream); font-weight: 500; }
+.navbar-zine .nav-link:hover { color: var(--coral); }
+.navbar-zine .navbar-toggler { border-color: var(--cream); }
+.navbar-zine .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* ---- Buttons (override Bootstrap primary) ------------------------------- */
+.btn {
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-primary,
+.btn-coral {
+  background: var(--coral);
+  border-color: var(--ink);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.btn-primary:hover,
+.btn-coral:hover {
+  background: var(--coral);
+  color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.btn-outline-ink {
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.btn-outline-ink:hover { background: var(--ink); color: var(--cream); }
+.btn-danger { background: #b6230f; border-color: var(--ink); color: var(--cream); }
+
+/* ---- Cards (skill cards, dashboard items) ------------------------------- */
+.zine-card {
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, box-shadow .15s ease;
+  display: flex; flex-direction: column; height: 100%;
+}
+.zine-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--ink);
+}
+.zine-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.35rem;
+}
+.zine-card .meta {
+  color: var(--slate);
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.85rem;
+}
+.zine-card .description {
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+/* ---- Badges ------------------------------------------------------------- */
+.tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--cream);
+  margin-right: 0.3rem;
+}
+.tag.tag-free  { background: var(--mint); color: #fff; }
+.tag.tag-paid  { background: var(--ink);  color: var(--cream); }
+.tag.tag-cat   { background: #ffe9b0; }
+.tag.tag-hidden{ background: #e9e7ed; color: var(--slate); }
+
+/* ---- Hero on home page -------------------------------------------------- */
+.hero {
+  padding: 4rem 0 3rem;
+  position: relative;
+}
+.hero .eyebrow {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.25rem 0.7rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg);
+  margin-bottom: 1.25rem;
+}
+.hero h1 .accent {
+  color: var(--coral);
+  font-style: italic;
+}
+.hero .lead {
+  font-size: 1.2rem;
+  max-width: 38rem;
+  color: var(--slate);
+}
+
+/* ---- Forms -------------------------------------------------------------- */
+.form-control, .form-select {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  background: #fff;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(255,90,74,0.25);
+}
+label { font-weight: 600; margin-bottom: 0.35rem; }
+.form-text { color: var(--slate); }
+
+.zine-panel {
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+/* ---- Messages (Django flash messages) ---------------------------------- */
+.alert {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  font-weight: 500;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.alert-success { background: #d4f0e3; color: var(--ink); }
+.alert-error,
+.alert-danger  { background: #ffd5d0; color: var(--ink); }
+.alert-info    { background: #fff3c4; color: var(--ink); }
+
+/* ---- Footer ------------------------------------------------------------- */
+.footer-zine {
+  border-top: 2px solid var(--ink);
+  padding: 1.6rem 0;
+  margin-top: 4rem;
+  color: var(--slate);
+  font-size: 0.9rem;
+}
+
+/* ---- Tiny helpers ------------------------------------------------------- */
+.tilt-left  { display: inline-block; transform: rotate(-2deg); }
+.tilt-right { display: inline-block; transform: rotate(2deg);  }

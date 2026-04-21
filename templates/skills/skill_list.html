@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Browse skills · SkillSwap{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+  <div>
+    <span class="eyebrow">The directory</span>
+    <h1 class="mt-2 mb-0">All skills on offer</h1>
+  </div>
+
+  <!-- Search + category filter (GET so URLs are shareable) -->
+  <form method="get" class="d-flex gap-2 flex-wrap" style="max-width: 520px;">
+    <input class="form-control" type="search" name="q"
+           value="{{ query }}" placeholder="Search title or description…">
+    <select class="form-select" name="category" style="max-width: 200px;">
+      <option value="">All categories</option>
+      {% for value, label in categories %}
+        <option value="{{ value }}" {% if value == category %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-outline-ink" type="submit">Filter</button>
+  </form>
+</div>
+
+{% if skills %}
+  <div class="row g-4">
+    {% for skill in skills %}
+      <div class="col-md-6 col-lg-4">
+        <div class="zine-card">
+          <div>
+            <span class="tag tag-cat">{{ skill.get_category_display }}</span>
+            {% if skill.is_free %}
+              <span class="tag tag-free">Free</span>
+            {% else %}
+              <span class="tag tag-paid">{{ skill.display_price }}</span>
+            {% endif %}
+          </div>
+
+          <h3 class="mt-3">
+            <a href="{% url 'skill_detail' skill.pk %}" class="text-reset text-decoration-none">
+              {{ skill.title }}
+            </a>
+          </h3>
+          <p class="meta">By {{ skill.owner.username }} · {{ skill.created_at|date:"M j, Y" }}</p>
+
+          <p class="description">{{ skill.description|truncatewords:24 }}</p>
+
+          <a class="btn btn-outline-ink btn-sm align-self-start" href="{% url 'skill_detail' skill.pk %}">
+            See details →
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="zine-panel text-center py-5">
+    <h2>No skills match your search.</h2>
+    <p class="text-muted">Try a different keyword, or clear the filter to see everything.</p>
+    <a class="btn btn-coral mt-2" href="{% url 'skill_list' %}">Show everything</a>
+  </div>
+{% endif %}
+{% endblock %}
