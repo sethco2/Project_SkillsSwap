@@ -5,7 +5,8 @@
       "Bash(.venv/Scripts/python.exe manage.py makemigrations skills)",
       "Bash(.venv/Scripts/python.exe manage.py migrate)",
       "Bash(.venv/Scripts/python.exe manage.py check)",
-      "Bash(.venv/Scripts/python.exe manage.py seed_data)"
+      "Bash(.venv/Scripts/python.exe manage.py seed_data)",
+      "Bash(git push *)"
     ]
   }
 }
