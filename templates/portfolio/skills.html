@@ -1,0 +1,49 @@
+{% extends "portfolio/base.html" %}
+
+{% block title %}Skills — Seth Grant{% endblock %}
+
+{% block content %}
+<section class="pf-section">
+  <div class="pf-container">
+    <div class="pf-eyebrow">Skills</div>
+    <h1 class="pf-h1">What I work in.</h1>
+    <p class="pf-lead">A snapshot of where I spend most of my technical and business time. AI prompting and creative problem solving are the throughlines, but the work cuts across automation, web, machine learning, and business strategy.</p>
+
+    <div style="margin-top: 40px;">
+      {% for label, items in grouped %}
+        <div class="pf-skill-group pf-reveal">
+          <div class="pf-skill-group__title">{{ label }}</div>
+          <div class="pf-skill-list">
+            {% for s in items %}
+              <div class="pf-skill">
+                <div class="pf-skill__name">{{ s.name }}</div>
+                {% if s.description %}<div class="pf-skill__desc">{{ s.description }}</div>{% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% empty %}
+        <div class="pf-empty">No skills yet — add some via Django admin.</div>
+      {% endfor %}
+    </div>
+
+    <div class="pf-divider"></div>
+    <div class="pf-eyebrow">Operating principles</div>
+    <h2 class="pf-h2">How I tend to work</h2>
+    <div class="pf-grid" style="margin-top: 18px;">
+      <div class="pf-card"><div class="pf-card__body">
+        <h3 class="pf-card__title">Build small, ship often</h3>
+        <p class="pf-card__desc">A working prototype beats a perfect plan. Iterate against real use.</p>
+      </div></div>
+      <div class="pf-card"><div class="pf-card__body">
+        <h3 class="pf-card__title">Connect the dots</h3>
+        <p class="pf-card__desc">Most useful systems live at the seams between tools. Treat the seams as first-class.</p>
+      </div></div>
+      <div class="pf-card"><div class="pf-card__body">
+        <h3 class="pf-card__title">Organize the chaos</h3>
+        <p class="pf-card__desc">Information becomes useful when it's connected, not when it's hoarded.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

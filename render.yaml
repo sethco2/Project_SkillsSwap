@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: seth-grant-portfolio
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate --noinput"
+    startCommand: "gunicorn skillswap.wsgi:application"
+    autoDeploy: true
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DJANGO_CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: WEB_CONCURRENCY
+        value: "2"
+      # Optional: enable contact form by setting these in the Render dashboard.
+      # - key: EMAIL_HOST
+      # - key: EMAIL_HOST_USER
+      # - key: EMAIL_HOST_PASSWORD
+      # - key: CONTACT_EMAIL
+      # Optional: switch to managed Postgres by setting DATABASE_URL.
+      # - key: DATABASE_URL

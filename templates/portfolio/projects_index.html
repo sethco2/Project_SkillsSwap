@@ -1,0 +1,62 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block title %}Projects — Seth Grant{% endblock %}
+
+{% block content %}
+<section class="pf-section">
+  <div class="pf-container">
+    <div class="pf-eyebrow">Projects</div>
+    <h1 class="pf-h1">Six class projects, built like real work.</h1>
+    <p class="pf-lead">Each project below is a full case study: business problem, tools used, what I built, what broke, and what I learned. Click any card to read the full write-up.</p>
+
+    <div class="pf-grid" style="margin-top: 40px;">
+      {% for p in projects %}
+        <a class="pf-card pf-reveal" href="{{ p.get_absolute_url }}">
+          <div class="pf-card__media">
+            {% if p.image %}
+              <img src="{{ p.image.url }}" alt="{{ p.image_alt|default:p.title }}">
+            {% elif p.static_image %}
+              <img src="{% static p.static_image %}" alt="{{ p.image_alt|default:p.title }}">
+            {% else %}
+              <div class="pf-card__media-empty">{{ p.title|upper }}</div>
+            {% endif %}
+          </div>
+          <div class="pf-card__body">
+            <div class="pf-card__cat">{{ p.get_category_display }}</div>
+            <h3 class="pf-card__title">{{ p.title }}</h3>
+            <p class="pf-card__desc">{{ p.one_sentence_summary }}</p>
+            <div class="pf-card__row">
+              <span class="pf-btn pf-btn--ghost pf-btn--sm">Read case study →</span>
+            </div>
+          </div>
+        </a>
+      {% empty %}
+        <div class="pf-empty">No projects yet. Run <code class="pf-mono">python manage.py migrate</code> to seed them, or add via admin.</div>
+      {% endfor %}
+    </div>
+
+    {% if personal_builds %}
+      <div class="pf-divider"></div>
+      <div class="pf-eyebrow">Beyond the classroom</div>
+      <h2 class="pf-h2">Ventures &amp; personal builds</h2>
+      <p class="pf-lead">Work I do outside of class — ventures I co-run, sites I've built, and AI systems I lean on every week.</p>
+
+      <div class="pf-grid" style="margin-top: 32px;">
+        {% for b in personal_builds %}
+          <div class="pf-card pf-reveal">
+            <div class="pf-card__body">
+              <div class="pf-card__cat">Personal build</div>
+              <h3 class="pf-card__title">{{ b.name }}</h3>
+              <p class="pf-card__desc">{{ b.summary }}</p>
+              {% if b.url %}
+                <a class="pf-btn pf-btn--ghost pf-btn--sm" href="{{ b.url }}" target="_blank" rel="noopener">Visit ↗</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

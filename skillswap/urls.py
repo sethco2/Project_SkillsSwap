@@ -1,31 +1,29 @@
 """
-Project-level URL router for SkillSwap.
+Project-level URL router.
 
-This file is the "front door" — every request first hits the patterns below.
-We mostly use `include()` to delegate to each app's own urls.py, which keeps
-this file short and lets each app own its own routes.
+The portfolio app owns the front door (/, /about/, /projects/...).
+Campus SkillSwap lives at /skillswap/ and is featured as a live demo.
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
-from django.views.generic import TemplateView  # quick way to render a template
+from django.urls import include, path
 
 urlpatterns = [
-    # Django admin site (auto-generated CRUD UI for our models).
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 
-    # Landing page. Using TemplateView avoids needing a view function just
-    # to render one static page. The `name='home'` is what LOGOUT_REDIRECT_URL
-    # in settings.py refers to.
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    # Portfolio (front door).
+    path("", include("portfolio.urls")),
 
-    # Auth URLs (login, logout, password change/reset). Django provides these
-    # for free — we just have to plug them in. They live under /accounts/...
-    # by default and look for templates inside templates/registration/.
-    path('accounts/', include('django.contrib.auth.urls')),
+    # Auth URLs (login, logout, password change/reset).
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/", include("accounts.urls")),
 
-    # Our own register view (signup) lives in the accounts app.
-    path('accounts/', include('accounts.urls')),
-
-    # Skill marketplace lives at /skills/...
-    path('skills/', include('skills.urls')),
+    # Campus SkillSwap — Django class project, kept live as a demo.
+    path("skillswap/", include("skills.urls")),
 ]
+
+# Serve uploaded media in development.
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

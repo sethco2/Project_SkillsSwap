@@ -8,6 +8,7 @@ __pycache__/
 .venv/
 venv/
 env/
+ENV/
 
 # --- Django ---
 # Local SQLite database — should never be committed; everyone makes their own
@@ -17,11 +18,26 @@ db.sqlite3-journal
 # Collected static files (only matters in production)
 /staticfiles/
 
+# User-uploaded media (admin uploads). Seeded screenshots in /static/media/
+# are kept under version control.
+/media/
+
 # Local environment variables / secrets
 .env
+.env.*
+!.env.example
+
+# --- Service credentials (never commit) ---
+service_account.json
+service_account.json.json
+credentials.json
+token.pickle
+*.pem
+*.key
 
 # --- Editor / OS noise ---
 .vscode/
 .idea/
+*.swp
 .DS_Store
 Thumbs.db

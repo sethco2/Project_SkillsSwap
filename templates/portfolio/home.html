@@ -1,0 +1,114 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block title %}Seth Grant — AI Builder &amp; MIS / Entrepreneurship{% endblock %}
+
+{% block content %}
+<section class="pf-hero">
+  <div class="pf-container">
+    <div class="pf-hero__grid">
+      <div class="pf-reveal">
+        <span class="pf-chip"><span class="pf-chip__dot"></span> Available for new projects</span>
+        <h1 class="pf-h1">I build AI systems<br>that turn information into action.</h1>
+        <p class="pf-hero__sub">
+          {{ SITE_TAGLINE }} I'm an MIS and Entrepreneurship student at Baylor's Honors College
+          shipping practical work in AI automation, business systems, and venture creation.
+        </p>
+        <div class="pf-hero__cta">
+          <a class="pf-btn pf-btn--primary" href="{% url 'portfolio:projects' %}">View Projects</a>
+          <a class="pf-btn pf-btn--ghost" href="{% url 'portfolio:resume' %}">View Resume</a>
+          <a class="pf-btn pf-btn--ghost" href="{% url 'portfolio:contact' %}">Contact Me</a>
+        </div>
+      </div>
+      <div class="pf-hero__photo pf-reveal">
+        {% if owner_photo_exists %}
+          <img src="{% static 'media/headshot.jpg' %}" alt="Seth Grant headshot">
+        {% else %}
+          <img src="{% static 'media/headshot.jpg' %}" alt="Seth Grant headshot"
+               onerror="this.outerHTML='<div class=&quot;pf-hero__placeholder&quot;>headshot.jpg<br>add to /static/media/</div>'">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pf-section pf-section--tight">
+  <div class="pf-container">
+    <div class="pf-eyebrow">Featured work</div>
+    <h2 class="pf-h2">Three projects worth seeing first</h2>
+    <p class="pf-lead">A pricing agent for a real service business, a personal knowledge system that connects ideas across projects, and a Django app for student skill exchange.</p>
+
+    <div class="pf-grid" style="margin-top: 40px;">
+      {% for p in featured_projects %}
+        <a class="pf-card pf-reveal" href="{{ p.get_absolute_url }}">
+          <div class="pf-card__media">
+            {% if p.image %}
+              <img src="{{ p.image.url }}" alt="{{ p.image_alt|default:p.title }}">
+            {% elif p.static_image %}
+              <img src="{% static p.static_image %}" alt="{{ p.image_alt|default:p.title }}">
+            {% else %}
+              <div class="pf-card__media-empty">{{ p.title|upper }}</div>
+            {% endif %}
+          </div>
+          <div class="pf-card__body">
+            <div class="pf-card__cat">{{ p.get_category_display }}</div>
+            <h3 class="pf-card__title">{{ p.title }}</h3>
+            <p class="pf-card__desc">{{ p.one_sentence_summary }}</p>
+            <div class="pf-card__row">
+              <span class="pf-btn pf-btn--ghost pf-btn--sm">Read case study →</span>
+            </div>
+          </div>
+        </a>
+      {% empty %}
+        <div class="pf-empty">No projects yet. Add some in Django admin.</div>
+      {% endfor %}
+    </div>
+
+    <div style="margin-top: 28px;">
+      <a class="pf-btn pf-btn--ghost" href="{% url 'portfolio:projects' %}">See all projects →</a>
+    </div>
+  </div>
+</section>
+
+{% if personal_builds %}
+<section class="pf-section pf-section--tight">
+  <div class="pf-container">
+    <div class="pf-eyebrow">Currently building</div>
+    <h2 class="pf-h2">Beyond the classroom</h2>
+    <p class="pf-lead">A few of the ventures and systems I'm working on outside of class.</p>
+
+    <div class="pf-grid" style="margin-top: 32px;">
+      {% for b in personal_builds %}
+        <div class="pf-card pf-reveal">
+          <div class="pf-card__body">
+            <div class="pf-card__cat">Personal build</div>
+            <h3 class="pf-card__title">{{ b.name }}</h3>
+            <p class="pf-card__desc">{{ b.summary }}</p>
+            {% if b.url %}
+              <a class="pf-btn pf-btn--ghost pf-btn--sm" href="{{ b.url }}" target="_blank" rel="noopener">Visit ↗</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="pf-section pf-section--tight">
+  <div class="pf-container">
+    <div class="pf-eyebrow">What I focus on</div>
+    <h2 class="pf-h2">AI, automation, and the practical edges of business</h2>
+    <p class="pf-lead">I care about the spaces where AI hits a real workflow, where the messy gets organized, and where ideas turn into systems. Faith, family, and discipline anchor the work.</p>
+    <div class="pf-cluster" style="margin-top: 22px;">
+      <span class="pf-tag">AI prompting</span>
+      <span class="pf-tag">LangChain agents</span>
+      <span class="pf-tag">n8n automation</span>
+      <span class="pf-tag">Django</span>
+      <span class="pf-tag">scikit-learn</span>
+      <span class="pf-tag">Brand &amp; venture work</span>
+      <span class="pf-tag">Knowledge systems</span>
+    </div>
+  </div>
+</section>
+{% endblock %}

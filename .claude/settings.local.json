@@ -6,7 +6,28 @@
       "Bash(.venv/Scripts/python.exe manage.py migrate)",
       "Bash(.venv/Scripts/python.exe manage.py check)",
       "Bash(.venv/Scripts/python.exe manage.py seed_data)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(ls \"C:/Users/sethn/OneDrive/Desktop/Portfolio Project/\" 2>&1 | head -50; echo \"---\"; ls \"C:/Users/sethn/OneDrive/Desktop/Portfolio Project/Screenshots/\" 2>&1 | head -50)",
+      "Bash(ls \"C:/Users/sethn/OneDrive/Email attachments/Documents/\" 2>&1 | head -30)",
+      "Bash(ls \"C:/Lyme Revive Foundation/\" 2>&1 | head -30; echo \"---ML---\"; ls \"C:/Users/sethn/Downloads/MIS AI CLASS/ml\" 2>&1 | head -30)",
+      "Bash(ls \"C:/Users/sethn/Downloads/MIS AI CLASS/HandyManProject\" 2>&1 | head -30; echo \"---LangChain---\"; ls \"C:/Users/sethn/Downloads/MIS AI CLASS/LangChainProject-1\" 2>&1 | head -30; echo \"---firstrepo---\"; ls \"C:/Users/sethn/Downloads/MIS AI CLASS/myfirstrepo_seth_grant\" 2>&1 | head -30)",
+      "Bash(ls \"C:/Users/sethn/Downloads/VS Code Fun\" 2>&1 | head -30; echo \"---Django learning---\"; ls \"C:/Users/sethn/OneDrive/Desktop/Django/Learning_Log-Dango_Project_I-Seth_Grant\" 2>&1 | head -30)",
+      "Bash(python -c \"import django; print\\('django', django.__version__\\)\")",
+      "Bash(python -c \"import whitenoise; print\\('whitenoise', whitenoise.__version__\\)\")",
+      "Bash(python -c \"import dj_database_url; print\\('dj_database_url ok'\\)\")",
+      "Bash(python -c \"import PIL; print\\('Pillow', PIL.__version__\\)\")",
+      "Bash(python -m pip install whitenoise dj-database-url Pillow)",
+      "Bash(python manage.py check)",
+      "Bash(rm -f db.sqlite3)",
+      "Bash(python manage.py migrate)",
+      "Bash(python manage.py test portfolio --verbosity 2)",
+      "Bash(ls \"C:/Users/sethn/OneDrive/Desktop/VS code parent folder/AdvancedPython/Project_SkillsSwap/.claude/worktrees/funny-pasteur-f72364/.venv\" 2>&1 | head -3; echo \"---\"; which python 2>&1; echo \"---\"; ls \"C:/Users/sethn/OneDrive/Desktop/VS code parent folder/AdvancedPython/Project_SkillsSwap/.venv\" 2>&1 | head -5)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8000/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8000/projects/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8000/skills/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8000/about/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8000/resume/)",
+      "Bash(curl -s http://127.0.0.1:8000/contact/)"
     ]
   }
 }

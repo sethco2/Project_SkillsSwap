@@ -1,0 +1,52 @@
+{% extends "portfolio/base.html" %}
+
+{% block title %}Contact — Seth Grant{% endblock %}
+
+{% block content %}
+<section class="pf-section">
+  <div class="pf-container">
+    <div class="pf-eyebrow">Contact</div>
+    <h1 class="pf-h1">Let's build something.</h1>
+    <p class="pf-lead">Looking for a builder for an AI project, a venture conversation, or a campus collaboration? The fastest path is email or LinkedIn — the form below also works.</p>
+
+    <div class="pf-contact__grid" style="margin-top: 36px;">
+      <form class="pf-form pf-reveal" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.website }}
+
+        <label for="id_name">Name</label>
+        {{ form.name }}
+        {% if form.name.errors %}<div class="pf-alert pf-alert--warning">{{ form.name.errors|join:", " }}</div>{% endif %}
+
+        <label for="id_email">Email</label>
+        {{ form.email }}
+        {% if form.email.errors %}<div class="pf-alert pf-alert--warning">{{ form.email.errors|join:", " }}</div>{% endif %}
+
+        <label for="id_subject">Subject</label>
+        {{ form.subject }}
+
+        <label for="id_message">Message</label>
+        {{ form.message }}
+        {% if form.message.errors %}<div class="pf-alert pf-alert--warning">{{ form.message.errors|join:", " }}</div>{% endif %}
+
+        <div style="margin-top: 22px;">
+          <button class="pf-btn pf-btn--primary" type="submit">Send message</button>
+          <a class="pf-btn pf-btn--ghost" href="mailto:{{ SITE_EMAIL }}">Or email directly</a>
+        </div>
+        <p class="pf-mono" style="margin-top: 14px;">If SMTP isn't configured, the email link above always works.</p>
+      </form>
+
+      <aside class="pf-reveal">
+        <ul class="pf-contact__list">
+          <li><span>Email</span><a href="mailto:{{ SITE_EMAIL }}">{{ SITE_EMAIL }}</a></li>
+          <li><span>School email</span><a href="mailto:seth_grant1@baylor.edu">seth_grant1@baylor.edu</a></li>
+          <li><span>LinkedIn</span><a href="{{ SITE_LINKEDIN }}" target="_blank" rel="noopener">in/sethngrant</a></li>
+          <li><span>GitHub</span><a href="{{ SITE_GITHUB }}" target="_blank" rel="noopener">@sethco1</a></li>
+          <li><span>Instagram</span><a href="{{ SITE_INSTAGRAM }}" target="_blank" rel="noopener">@sethngrant</a></li>
+          <li><span>TikTok</span><a href="{{ SITE_TIKTOK }}" target="_blank" rel="noopener">@seethlifts</a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block title %}Resume — Seth Grant{% endblock %}
+
+{% block content %}
+<section class="pf-section">
+  <div class="pf-container">
+    <div class="pf-eyebrow">Resume</div>
+    <h1 class="pf-h1">Seth Grant — Resume</h1>
+    <p class="pf-lead">MIS and Entrepreneurship graduate focused on AI automation, business development, and venture creation.</p>
+
+    <div class="pf-resume__bar" style="margin-top: 24px;">
+      <a class="pf-btn pf-btn--primary" href="{% static 'media/Seth_Grant_Resume.pdf' %}" download>Download PDF</a>
+      <a class="pf-btn pf-btn--ghost" href="{% static 'media/Seth_Grant_Resume.pdf' %}" target="_blank" rel="noopener">Open in new tab</a>
+      <a class="pf-btn pf-btn--ghost" href="{{ SITE_LINKEDIN }}" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <div class="pf-resume__embed pf-reveal">
+      <iframe src="{% static 'media/Seth_Grant_Resume.pdf' %}#view=FitH" title="Seth Grant resume PDF"></iframe>
+    </div>
+
+    <div class="pf-divider"></div>
+
+    <div class="pf-eyebrow">At a glance</div>
+    <h2 class="pf-h2">Background</h2>
+    <div class="pf-quick"><div class="pf-quick__k">Education</div><div class="pf-quick__v">Baylor University, Honors College · MIS &amp; Entrepreneurship and Corporate Innovation · Spring 2026</div></div>
+    <div class="pf-quick"><div class="pf-quick__k">Focus</div><div class="pf-quick__v">AI automation, business systems, venture creation, research workflows</div></div>
+    <div class="pf-quick"><div class="pf-quick__k">Recognition</div><div class="pf-quick__v">Top 50 — Baylor New Venture Competition (AuraAnn Skincare)</div></div>
+    <div class="pf-quick"><div class="pf-quick__k">Leadership</div><div class="pf-quick__v">Histor — Tau Kappa Epsilon</div></div>
+    <div class="pf-quick"><div class="pf-quick__k">Location</div><div class="pf-quick__v">Waco, TX → Austin area, post-grad</div></div>
+
+    {% if experiences %}
+      <div class="pf-divider"></div>
+      <div class="pf-eyebrow">Experience</div>
+      <h2 class="pf-h2">Where I've worked</h2>
+      {% for e in experiences %}
+        <div class="pf-exp">
+          <div class="pf-exp__head">
+            <div>
+              <div class="pf-exp__role">{{ e.role }} <span class="pf-exp__org">· {{ e.organization }}</span></div>
+              {% if e.location %}<div class="pf-exp__org">{{ e.location }}</div>{% endif %}
+            </div>
+            <div class="pf-exp__dates">{{ e.start_date }} — {{ e.end_date|default:"Present" }}</div>
+          </div>
+          {% if e.bullets %}
+            <ul class="pf-exp__bullets">
+              {% for b in e.bullets %}<li>{{ b }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

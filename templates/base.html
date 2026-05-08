@@ -31,7 +31,7 @@
   <!-- ============== Navbar ============== -->
   <nav class="navbar navbar-zine navbar-expand-md">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">
+      <a class="navbar-brand" href="{% url 'portfolio:home' %}">
         <span class="brand-mark">Skill</span>Swap
       </a>
 
@@ -42,6 +42,7 @@
 
       <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:home' %}">← Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'skill_list' %}">Browse</a></li>
           {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">My skills</a></li>

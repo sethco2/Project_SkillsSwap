@@ -1,0 +1,173 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} — Seth Grant{% endblock %}
+
+{% block content %}
+<section class="pf-project__head">
+  <div class="pf-container pf-reveal">
+    <a class="pf-mono" href="{% url 'portfolio:projects' %}" style="color: var(--pf-text-mute);">← All projects</a>
+    <div class="pf-eyebrow" style="margin-top: 18px;">{{ project.get_category_display }}</div>
+    <h1 class="pf-h1" style="margin-bottom: 12px;">{{ project.title }}</h1>
+    <p class="pf-lead">{{ project.one_sentence_summary }}</p>
+
+    <div class="pf-cluster" style="margin-top: 22px;">
+      {% if project.github_link %}
+        <a class="pf-btn pf-btn--primary" href="{{ project.github_link }}" target="_blank" rel="noopener">View on GitHub ↗</a>
+      {% endif %}
+      {% if project.demo_link %}
+        <a class="pf-btn pf-btn--ghost" href="{{ project.demo_link }}" target="_blank" rel="noopener">Live demo ↗</a>
+      {% endif %}
+    </div>
+
+    <div class="pf-project__hero-img">
+      {% if project.image %}
+        <img src="{{ project.image.url }}" alt="{{ project.image_alt|default:project.title }}">
+      {% elif project.static_image %}
+        <img src="{% static project.static_image %}" alt="{{ project.image_alt|default:project.title }}">
+      {% else %}
+        <div style="width:100%;height:100%;display:grid;place-items:center;color:var(--pf-text-dim);font-family:var(--pf-font-mono);font-size:13px;">
+          add screenshot via admin · /static/media/projects/
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="pf-project__body">
+  <div class="pf-container">
+    <div class="pf-project__layout">
+      <aside class="pf-project__toc">
+        <div style="margin-bottom: 10px; color: var(--pf-text); font-weight: 600;">In this case study</div>
+        <ol>
+          <li><a href="#s-summary">01 · Summary</a></li>
+          <li><a href="#s-problem">02 · Business problem</a></li>
+          <li><a href="#s-tools">03 · Tools used</a></li>
+          <li><a href="#s-features">04 · Key features</a></li>
+          <li><a href="#s-role">05 · My role</a></li>
+          <li><a href="#s-challenge">06 · Biggest challenge</a></li>
+          <li><a href="#s-learn">07 · What I learned</a></li>
+          <li><a href="#s-visual">08 · Visual</a></li>
+          <li><a href="#s-links">09 · Links</a></li>
+        </ol>
+      </aside>
+
+      <div class="pf-reveal">
+        <div id="s-summary" class="pf-block">
+          <div class="pf-block__num">01 · One-sentence summary</div>
+          <h2 class="pf-block__h">{{ project.title }}</h2>
+          <div class="pf-block__body"><p>{{ project.one_sentence_summary }}</p></div>
+        </div>
+
+        <div id="s-problem" class="pf-block">
+          <div class="pf-block__num">02 · Business problem</div>
+          <h2 class="pf-block__h">What this project solves</h2>
+          <div class="pf-block__body">
+            {% if project.business_problem %}
+              <p>{{ project.business_problem|linebreaksbr }}</p>
+            {% else %}
+              <p><em>To be added after final project upload.</em></p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="s-tools" class="pf-block">
+          <div class="pf-block__num">03 · Tools used</div>
+          <h2 class="pf-block__h">Stack</h2>
+          <div class="pf-block__body">
+            {% if project.tools_list %}
+              <div class="pf-cluster">
+                {% for t in project.tools_list %}<span class="pf-tag">{{ t }}</span>{% endfor %}
+              </div>
+            {% else %}
+              <p><em>To be added after final project upload.</em></p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="s-features" class="pf-block">
+          <div class="pf-block__num">04 · Key features</div>
+          <h2 class="pf-block__h">What it does</h2>
+          <div class="pf-block__body">
+            {% if project.features_list %}
+              <ul>{% for f in project.features_list %}<li>{{ f }}</li>{% endfor %}</ul>
+            {% else %}
+              <p><em>To be added after final project upload.</em></p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="s-role" class="pf-block">
+          <div class="pf-block__num">05 · My role / contribution</div>
+          <h2 class="pf-block__h">What I built</h2>
+          <div class="pf-block__body">
+            {% if project.role_contribution %}
+              <p>{{ project.role_contribution|linebreaksbr }}</p>
+            {% else %}
+              <p><em>To be added after final project upload.</em></p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="s-challenge" class="pf-block">
+          <div class="pf-block__num">06 · Biggest challenge</div>
+          <h2 class="pf-block__h">Where it got hard</h2>
+          <div class="pf-block__body">
+            {% if project.biggest_challenge %}
+              <p>{{ project.biggest_challenge|linebreaksbr }}</p>
+            {% else %}
+              <p><em>To be added after final project upload.</em></p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="s-learn" class="pf-block">
+          <div class="pf-block__num">07 · What I learned</div>
+          <h2 class="pf-block__h">Takeaways</h2>
+          <div class="pf-block__body">
+            {% if project.what_i_learned %}
+              <p>{{ project.what_i_learned|linebreaksbr }}</p>
+            {% else %}
+              <p><em>To be added after final project upload.</em></p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="s-visual" class="pf-block">
+          <div class="pf-block__num">08 · Visual</div>
+          <h2 class="pf-block__h">Screenshot</h2>
+          <div class="pf-block__body">
+            {% if project.image %}
+              <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--pf-line);">
+                <img src="{{ project.image.url }}" alt="{{ project.image_alt|default:project.title }}">
+              </div>
+            {% elif project.static_image %}
+              <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--pf-line);">
+                <img src="{% static project.static_image %}" alt="{{ project.image_alt|default:project.title }}">
+              </div>
+            {% else %}
+              <p><em>Add a screenshot via Django admin or drop one in <span class="pf-mono">/media/projects/</span>.</em></p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="s-links" class="pf-block">
+          <div class="pf-block__num">09 · GitHub / demo</div>
+          <h2 class="pf-block__h">Where to find it</h2>
+          <div class="pf-block__body pf-cluster">
+            {% if project.github_link %}
+              <a class="pf-btn pf-btn--ghost pf-btn--sm" href="{{ project.github_link }}" target="_blank" rel="noopener">GitHub ↗</a>
+            {% endif %}
+            {% if project.demo_link %}
+              <a class="pf-btn pf-btn--ghost pf-btn--sm" href="{{ project.demo_link }}" target="_blank" rel="noopener">Live demo ↗</a>
+            {% endif %}
+            {% if not project.github_link and not project.demo_link %}
+              <p style="margin:0;"><em>Links coming soon.</em></p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

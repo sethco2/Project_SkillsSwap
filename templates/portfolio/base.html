@@ -1,0 +1,93 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{ SITE_OWNER }} — {{ SITE_TAGLINE }}">
+  <meta name="theme-color" content="#0a0d12">
+  <title>{% block title %}{{ SITE_OWNER }} — Portfolio{% endblock %}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="pf-body">
+  <a class="pf-skip" href="#pf-main">Skip to content</a>
+
+  <header class="pf-nav">
+    <div class="pf-container pf-nav__inner">
+      <a class="pf-brand" href="{% url 'portfolio:home' %}">
+        <span class="pf-brand__mark">SG</span>
+        <span class="pf-brand__name">Seth Grant</span>
+      </a>
+      <button class="pf-nav__toggle" aria-label="Open menu" data-pf-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="pf-nav__links" data-pf-nav>
+        <a href="{% url 'portfolio:home' %}">Home</a>
+        <a href="{% url 'portfolio:about' %}">About</a>
+        <a href="{% url 'portfolio:projects' %}">Projects</a>
+        <a href="{% url 'portfolio:skills' %}">Skills</a>
+        <a href="{% url 'portfolio:resume' %}">Resume</a>
+        <a href="{% url 'portfolio:contact' %}" class="pf-nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  {% if messages %}
+    <div class="pf-container pf-flash">
+      {% for message in messages %}
+        <div class="pf-alert pf-alert--{{ message.tags|default:'info' }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main id="pf-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="pf-footer">
+    <div class="pf-container pf-footer__inner">
+      <div>
+        <div class="pf-footer__name">Seth Grant</div>
+        <div class="pf-footer__tag">Baylor MIS &amp; Entrepreneurship · Class of 2026</div>
+      </div>
+      <div class="pf-footer__links">
+        <a href="mailto:{{ SITE_EMAIL }}">Email</a>
+        <a href="{{ SITE_LINKEDIN }}" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="{{ SITE_GITHUB }}" target="_blank" rel="noopener">GitHub</a>
+        <a href="{% url 'portfolio:resume' %}">Resume</a>
+      </div>
+    </div>
+    <div class="pf-container pf-footer__legal">
+      © {% now "Y" %} Seth Grant. Built with Django.
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.querySelector('[data-pf-nav-toggle]');
+      var nav = document.querySelector('[data-pf-nav]');
+      if (btn && nav) btn.addEventListener('click', function () {
+        nav.classList.toggle('pf-nav__links--open');
+        btn.classList.toggle('pf-nav__toggle--open');
+      });
+
+      // Subtle reveal-on-scroll for any element with .pf-reveal
+      var io = ('IntersectionObserver' in window) && new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('pf-reveal--in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      if (io) document.querySelectorAll('.pf-reveal').forEach(function (n) { io.observe(n); });
+    })();
+  </script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

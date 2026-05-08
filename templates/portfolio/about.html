@@ -1,0 +1,69 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block title %}About — Seth Grant{% endblock %}
+
+{% block content %}
+<section class="pf-section">
+  <div class="pf-container">
+    <div class="pf-eyebrow">About</div>
+    <h1 class="pf-h1">Builder, student, faith-driven systems thinker.</h1>
+
+    <div class="pf-about__grid" style="margin-top: 28px;">
+      <div class="pf-reveal">
+        <p class="pf-lead">
+          I'm Seth Grant, a senior at Baylor University's Honors College graduating spring 2026
+          with degrees in Management Information Systems and Entrepreneurship and Corporate Innovation.
+        </p>
+        <p style="color: var(--pf-text-mute);">
+          I spend most of my time at the intersection of AI, business systems, and venture work. I like
+          taking messy information and turning it into something a person, a team, or a small business
+          can actually use. Whether that's a LangChain agent that prices service jobs, an n8n workflow
+          that organizes research, or a Django app for student skill exchange, the through-line is the
+          same: build something useful, then keep sharpening it.
+        </p>
+        <p style="color: var(--pf-text-mute);">
+          Outside of class, I'm building AuraAnn Skincare, supporting MineralsRx, and running
+          LymeReviveFoundation.org as an education platform. I lift heavy, study scripture, and care
+          about the kind of long-game work that compounds over time. Top 50 in Baylor's New Venture
+          Competition with AuraAnn was an early validation that the work I want to do can travel.
+        </p>
+        <p style="color: var(--pf-text-mute);">
+          Faith, family, weightlifting, and self-improvement are the anchors. Curiosity, organization,
+          and a builder's bias are how I move.
+        </p>
+
+        <div class="pf-divider"></div>
+
+        <h2 class="pf-h2">Quick facts</h2>
+        <div class="pf-quick"><div class="pf-quick__k">School</div><div class="pf-quick__v">Baylor University · Honors College</div></div>
+        <div class="pf-quick"><div class="pf-quick__k">Majors</div><div class="pf-quick__v">MIS &amp; Entrepreneurship and Corporate Innovation</div></div>
+        <div class="pf-quick"><div class="pf-quick__k">Graduating</div><div class="pf-quick__v">Spring 2026</div></div>
+        <div class="pf-quick"><div class="pf-quick__k">From</div><div class="pf-quick__v">Lovettsville, VA · now in Waco, TX</div></div>
+        <div class="pf-quick"><div class="pf-quick__k">Next</div><div class="pf-quick__v">Austin, Texas area post-grad</div></div>
+        <div class="pf-quick"><div class="pf-quick__k">Personality</div><div class="pf-quick__v">INFJ-T</div></div>
+
+        <div class="pf-divider"></div>
+
+        <h2 class="pf-h2">Highlights</h2>
+        <ul style="color: var(--pf-text-mute); padding-left: 20px;">
+          <li>Top 50 in Baylor's New Venture Competition with <strong style="color: var(--pf-text);">AuraAnn Skincare</strong>.</li>
+          <li>Histor for Tau Kappa Epsilon, leading alumni engagement and chapter history work.</li>
+          <li>Honors College and BIC shaped a wider lens on people, cultures, systems, and beliefs.</li>
+        </ul>
+      </div>
+
+      <div class="pf-reveal">
+        <div class="pf-about__photo">
+          <img src="{% static 'media/headshot.jpg' %}" alt="Seth Grant"
+               onerror="this.outerHTML='<div class=&quot;pf-hero__placeholder&quot;>headshot.jpg<br>add to /static/media/</div>'">
+        </div>
+        <div style="margin-top: 18px; color: var(--pf-text-mute); font-size: .92rem;">
+          <a class="pf-btn pf-btn--ghost pf-btn--sm" href="{% url 'portfolio:resume' %}">Open resume</a>
+          <a class="pf-btn pf-btn--ghost pf-btn--sm" href="{% url 'portfolio:contact' %}">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
